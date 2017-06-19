@@ -1,0 +1,10 @@
+<div class="todo-view">
+    <h3>{{todo.title}}</h3>
+    <p class="description">{{todo.description}}</p>
+    <button class="btn btn-default btn-raised" v-on:click="editTodo">
+        <i class="fa fa-grav" aria-hidden="true"></i> Edit
+    </button>&nbsp
+    <button class="btn btn-danger" v-on:click="deleteTodo">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Delete
+    </button>
+</div>

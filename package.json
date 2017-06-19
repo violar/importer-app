@@ -1,0 +1,63 @@
+{
+  "name": "todo-app",
+  "version": "1.0.0",
+  "description": "Client APP for TODO",
+  "main": "./src/main.js",
+  "scripts": {
+    "ts-build": "tsc -p .",
+    "ts-build-watch": "npm run ts-build -- -w",
+    "scss-build": "node-sass src/client --output src/client",
+    "scss-build-watch": "onchange 'src/client/**/*.scss' -- npm run scss-build",
+    "prebundle-build": "npm run ts-build",
+    "bundle-build": "webpack ./src/client/app.js ./src/client/static/scripts/app-bundle.js",
+    "bundle-build-watch": "npm run bundle-build -- -w",
+    "build": "npm run ts-build && npm run scss-build && npm run bundle-build",
+    "nodemon": "nodemon --ignore src/client/ --debug ./src/main.js mode=dev",
+    "predebug": "npm run build",
+    "debug": "npm run ts-build-watch & npm run bundle-build-watch & npm run scss-build-watch & npm run nodemon",
+    "prestart": "npm install && npm run build",
+    "start": "node ./src/main.js",
+    "pretest": "npm run ts-build",
+    "test": "mocha --reporter spec --ui tdd --require ts-node/register './test/**/*.test.js' || true",
+    "pretest-ci": "npm run pretest",
+    "test-ci": "mocha --reporter spec --ui tdd --require ts-node/register './test/**/*.test.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nivinjoseph/todo-app.git"
+  },
+  "keywords": [
+    "TODO",
+    "client"
+  ],
+  "author": "NiviN",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nivinjoseph/todo-app/issues"
+  },
+  "homepage": "https://github.com/nivinjoseph/todo-app#readme",
+  "devDependencies": {
+    "@types/mocha": "^2.2.39",
+    "@types/node": "^7.0.5",
+    "@types/sinon": "^1.16.35",
+    "mocha": "^3.2.0",
+    "n-design": "git+https://github.com/nivinjoseph/n-design.git",
+    "node-sass": "^4.5.2",
+    "nodemon": "^1.11.0",
+    "onchange": "^3.2.1",
+    "sinon": "^2.0.0-pre.6",
+    "ts-node": "^2.1.0",
+    "tslint": "^4.5.1",
+    "typescript": "2.2.1",
+    "webpack": "^2.4.1"
+  },
+  "dependencies": {
+    "n-app": "git+https://github.com/nivinjoseph/n-app.git",
+    "n-defensive": "git+https://github.com/nivinjoseph/n-defensive.git",
+    "n-exception": "git+https://github.com/nivinjoseph/n-exception.git",
+    "n-ext": "git+https://github.com/nivinjoseph/n-ext.git",
+    "n-ject": "git+https://github.com/nivinjoseph/n-ject.git",
+    "n-web": "git+https://github.com/nivinjoseph/n-web.git",
+    "reflect-metadata": "^0.1.10"
+  }
+}

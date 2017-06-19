@@ -1,0 +1,8 @@
+<div class="todos-view">
+    <h3>Todos view</h3>
+
+    <div v-for="todo in todos">
+        <todo v-bind:value="todo" v-bind:edit-value="editTodo" v-bind:delete-value="deleteTodo"></todo>
+    </div>
+
+</div>
