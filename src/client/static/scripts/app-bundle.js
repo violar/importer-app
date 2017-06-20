@@ -2251,37 +2251,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const n_app_1 = __webpack_require__(4);
-const n_defensive_1 = __webpack_require__(0);
 const Routes = __webpack_require__(6);
 const n_ject_1 = __webpack_require__(7);
 let TodosViewModel = class TodosViewModel extends n_app_1.PageViewModel {
     constructor(todoRepository, navigationService, dialogService) {
-        n_defensive_1.given(todoRepository, "todoRepository").ensureHasValue();
-        n_defensive_1.given(navigationService, "navigationService").ensureHasValue();
-        n_defensive_1.given(dialogService, "dialogService").ensureHasValue();
         super();
         this._todoRepository = todoRepository;
         this._navigationService = navigationService;
         this._dialogService = dialogService;
-        this._todos = new Array();
+        this._title = this._description = null;
     }
-    get todos() { return this._todos; }
-    editTodo(todo) {
-        this._navigationService.navigate(Routes.updateTodo, { id: todo.id });
-    }
-    deleteTodo(todo) {
-        this._todoRepository
-            .deleteTodo(todo.id)
-            .then(() => this._todoRepository.getTodos())
-            .then(t => this._todos = t);
-    }
-    onEnter() {
-        this._todoRepository.getTodos()
-            .then(t => {
-            this._todos = t;
-            this._dialogService.showSuccessMessage("Todos loaded");
-        })
-            .catch(() => this._dialogService.showErrorMessage("Failed to load Todos"));
+    get title() { return this._title; }
+    set title(value) { this._title = value; }
+    get description() { return this._description; }
+    set description(value) { this._description = value; }
+    newImport() {
+        this._navigationService.navigate(Routes.createTodo, null);
     }
 };
 TodosViewModel = __decorate([

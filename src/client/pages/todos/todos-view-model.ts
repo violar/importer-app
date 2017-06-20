@@ -13,49 +13,33 @@ export class TodosViewModel extends PageViewModel
     private readonly _todoRepository: TodoRepository;
     private readonly _navigationService: NavigationService;
     private readonly _dialogService: DialogService;
-    private _todos: Array<Todo>;
-    
-    
-    public get todos(): Array<Todo> { return this._todos; }
-    
-    
+
+
+    private _title: string;
+    private _description: string;
+
+
+    public get title(): string { return this._title; }
+    public set title(value: string) { this._title = value; }
+
+    public get description(): string { return this._description; }
+    public set description(value: string) { this._description = value; }
+
+
     public constructor(todoRepository: TodoRepository, navigationService: NavigationService, dialogService: DialogService)
     {
-        given(todoRepository, "todoRepository").ensureHasValue();
-        given(navigationService, "navigationService").ensureHasValue();
-        given(dialogService, "dialogService").ensureHasValue();
-        
         super();
-        
+
         this._todoRepository = todoRepository;
         this._navigationService = navigationService;
         this._dialogService = dialogService;
-        this._todos = new Array<Todo>();
+
+        this._title = this._description = null;
     }
-    
-    
-    public editTodo(todo: Todo): void
+
+
+    public newImport(): void
     {
-        this._navigationService.navigate(Routes.updateTodo, { id: todo.id });
-    }
-    
-    public deleteTodo(todo: Todo): void
-    {
-        this._todoRepository
-            .deleteTodo(todo.id)
-            .then(() => this._todoRepository.getTodos())
-            .then(t => this._todos = t);
-    }
-    
-    
-    protected onEnter(): void
-    {
-        this._todoRepository.getTodos()
-            .then(t =>
-            {
-                this._todos = t;
-                this._dialogService.showSuccessMessage("Todos loaded");
-            })
-            .catch(() => this._dialogService.showErrorMessage("Failed to load Todos"));
+        this._navigationService.navigate(Routes.createTodo, null);
     }
 }

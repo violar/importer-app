@@ -1,8 +1,9 @@
-<div class="todos-view">
-    <h3>Todos view</h3>
+<div class="todos-view container">
+    <div class="jumbotron">
+        <h1>Imports</h1>
 
-    <div v-for="todo in todos">
-        <todo v-bind:value="todo" v-bind:edit-value="editTodo" v-bind:delete-value="deleteTodo"></todo>
+        <p>No imports have been added.</p>
+        
+        <div><button class="btn btn-primary btn-raised" v-on:click="newImport()">New Import</button></div>
     </div>
-
 </div>

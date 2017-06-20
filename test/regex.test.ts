@@ -2,7 +2,7 @@ import * as Assert from "assert";
 
 suite("Regex", () =>
 {
-    let reg = new RegExp("^[A-Za-z]([A-Za-z0-9]*_?)*[A-Za-z0-9]$");
+    let reg = new RegExp("^[A-Za-z][A-Za-z0-9]*((_[A-Za-z0-9]+)*)$");
     
     test("should return true when first character is a string", () =>
     {
@@ -13,9 +13,27 @@ suite("Regex", () =>
         Assert.strictEqual(result, true);
     });
     
+    test("should return true when only one character is provided and is a string", () =>
+    {
+        let str = "s";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, true);
+    });
+    
     test("should return true when underscores are added after the initial character and before the last character", () =>
     {
         let str = "sku_sku";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, true);
+    });
+    
+    test("should return true when multiple underscores and words are used", () =>
+    {
+        let str = "sku_sku_Sku9";
 
         let result = reg.test(str);
 
@@ -52,6 +70,15 @@ suite("Regex", () =>
     test("should return false when last character is an underscore", () =>
     {
         let str = "sku_";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, false);
+    });
+    
+    test("should return false when double underscores are used", () =>
+    {
+        let str = "sku__sku";
 
         let result = reg.test(str);
 
