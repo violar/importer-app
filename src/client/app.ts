@@ -6,6 +6,7 @@ import { TodoViewModel } from "./components/todo/todo-view-model";
 import { TodosViewModel } from "./pages/todos/todos-view-model";
 import { CreateTodoViewModel } from "./pages/createTodo/create-todo-view-model";
 import { UpdateTodoViewModel } from "./pages/updateTodo/update-todo-view-model";
+import { CreateTemplateViewModel } from "./pages/createTemplate/create-template-view-model";
 
 
 
@@ -17,7 +18,7 @@ class Installer implements ComponentInstaller
     }
 }
 
-const pages = [TodosViewModel, CreateTodoViewModel, UpdateTodoViewModel];
+const pages = [TodosViewModel, CreateTodoViewModel, UpdateTodoViewModel, CreateTemplateViewModel];
 
 const app = new ClientApp("#app")
     .enableDevMode()

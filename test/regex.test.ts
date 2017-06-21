@@ -129,4 +129,49 @@ suite("Regex", () =>
 
         Assert.strictEqual(result, false);
     });
+    
+    test("should return false when '$' character is used", () =>
+    {
+        let str = "$sku";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, false);
+    });
+    
+    test("should return false when '-' character is used", () =>
+    {
+        let str = "sku-sku";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, false);
+    });
+    
+    test("should return false when '@' character is used", () =>
+    {
+        let str = "sku@";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, false);
+    });
+    
+    test("should return false when '!' character is used", () =>
+    {
+        let str = "sku!_sku";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, false);
+    });
+    
+    test("should return false when ':' character is used", () =>
+    {
+        let str = "s:ku";
+
+        let result = reg.test(str);
+
+        Assert.strictEqual(result, false);
+    });
 });

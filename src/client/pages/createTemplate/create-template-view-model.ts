@@ -3,41 +3,34 @@ import { TodoRepository } from "../../services/todo-repository/todo-repository";
 import { inject } from "n-ject";
 import * as Routes from "./../routes";
 
-@route(Routes.createTodo)
-@view("create-todo-view")    
+@route(Routes.createTemplate)
+@view("create-template-view")
 @inject("TodoRepository", "NavigationService", "DialogService")
-export class CreateTodoViewModel extends PageViewModel
+export class CreateTemplateViewModel extends PageViewModel
 {
     private readonly _todoRepository: TodoRepository;
     private readonly _navigationService: NavigationService;
     private readonly _dialogService: DialogService;
-    
-    
-    private _title: string;
-    private _description: string;
-    
-    
-    public get title(): string { return this._title; }
-    public set title(value: string) { this._title = value; }
-    
-    public get description(): string { return this._description; }
-    public set description(value: string) { this._description = value; }
-    
-    
+
+
+    private _attributeName: string;
+
+
+    public get attributeName(): string { return this._attributeName; }
+    public set attributeName(value: string) { this._attributeName = value; }
+
+
     public constructor(todoRepository: TodoRepository, navigationService: NavigationService, dialogService: DialogService)
     {
         super();
-        
+
         this._todoRepository = todoRepository;
         this._navigationService = navigationService;
         this._dialogService = dialogService;
-        
-        this._title = this._description = null;
+
+        this._attributeName = null;
     }
+
+
     
-    
-    public createTemplate(): void
-    {
-        this._navigationService.navigate(Routes.createTemplate, null);
-    }
 }

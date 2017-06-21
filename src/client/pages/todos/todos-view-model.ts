@@ -38,7 +38,7 @@ export class TodosViewModel extends PageViewModel
     }
 
 
-    public newImport(): void
+    public createImport(): void
     {
         this._navigationService.navigate(Routes.createTodo, null);
     }

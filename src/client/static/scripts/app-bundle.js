@@ -1350,6 +1350,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.todos = "/todos";
 exports.createTodo = "/createTodo";
 exports.updateTodo = "/updateTodo/{id: number}";
+exports.createTemplate = "/createTemplate";
 //# sourceMappingURL=routes.js.map
 
 /***/ }),
@@ -2216,13 +2217,8 @@ let CreateTodoViewModel = class CreateTodoViewModel extends n_app_1.PageViewMode
     set title(value) { this._title = value; }
     get description() { return this._description; }
     set description(value) { this._description = value; }
-    submit() {
-        this._todoRepository.addTodo(this.title, this.description)
-            .then(() => {
-            this._dialogService.showSuccessMessage("Todo created");
-            this._navigationService.navigate(Routes.todos, null);
-        })
-            .catch(() => this._dialogService.showErrorMessage("Failed to create Todo"));
+    createTemplate() {
+        this._navigationService.navigate(Routes.createTemplate, null);
     }
 };
 CreateTodoViewModel = __decorate([
@@ -2265,7 +2261,7 @@ let TodosViewModel = class TodosViewModel extends n_app_1.PageViewModel {
     set title(value) { this._title = value; }
     get description() { return this._description; }
     set description(value) { this._description = value; }
-    newImport() {
+    createImport() {
         this._navigationService.navigate(Routes.createTodo, null);
     }
 };
@@ -17184,12 +17180,13 @@ const todo_view_model_1 = __webpack_require__(25);
 const todos_view_model_1 = __webpack_require__(27);
 const create_todo_view_model_1 = __webpack_require__(26);
 const update_todo_view_model_1 = __webpack_require__(28);
+const create_template_view_model_1 = __webpack_require__(63);
 class Installer {
     install(registry) {
         registry.registerSingleton("TodoRepository", inmemory_todo_repository_1.InmemoryTodoRepository);
     }
 }
-const pages = [todos_view_model_1.TodosViewModel, create_todo_view_model_1.CreateTodoViewModel, update_todo_view_model_1.UpdateTodoViewModel];
+const pages = [todos_view_model_1.TodosViewModel, create_todo_view_model_1.CreateTodoViewModel, update_todo_view_model_1.UpdateTodoViewModel, create_template_view_model_1.CreateTemplateViewModel];
 const app = new n_app_1.ClientApp("#app")
     .enableDevMode()
     .useAccentColor("#7ab53b")
@@ -17220,6 +17217,45 @@ class Todo {
 }
 exports.Todo = Todo;
 //# sourceMappingURL=todo.js.map
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const n_app_1 = __webpack_require__(4);
+const n_ject_1 = __webpack_require__(7);
+const Routes = __webpack_require__(6);
+let CreateTemplateViewModel = class CreateTemplateViewModel extends n_app_1.PageViewModel {
+    constructor(todoRepository, navigationService, dialogService) {
+        super();
+        this._todoRepository = todoRepository;
+        this._navigationService = navigationService;
+        this._dialogService = dialogService;
+        this._attributeName = null;
+    }
+    get attributeName() { return this._attributeName; }
+    set attributeName(value) { this._attributeName = value; }
+};
+CreateTemplateViewModel = __decorate([
+    n_app_1.route(Routes.createTemplate),
+    n_app_1.view("create-template-view"),
+    n_ject_1.inject("TodoRepository", "NavigationService", "DialogService"),
+    __metadata("design:paramtypes", [Object, Object, Object])
+], CreateTemplateViewModel);
+exports.CreateTemplateViewModel = CreateTemplateViewModel;
+//# sourceMappingURL=create-template-view-model.js.map
 
 /***/ })
 /******/ ]);
